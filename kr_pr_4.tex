@@ -1,0 +1,55 @@
+\subsection{Практчні задачі}
+\begin{tsk}
+	Поміняти місцем дві змінні t1 та t2 так, щоб не використовувалась додаткова пам’ять.
+	Математичний алгоритм:
+	\begin{eqnarray}
+		t1 &=& t1 + t2 \\
+		t2 &=& t1 - t2\\
+		t1 &=& t1 - t2\\
+	\end{eqnarray}
+	\begin{verbatim}
+		add $t1,$t1,$t2
+		sub $t2,$t1,$t2
+		sub $t1,$t1,$t2
+	\end{verbatim}
+\end{tsk}
+\begin{tsk}
+	Знайти кількість ненульових бітів у числі n.\\
+	\begin{verbatim}
+	addi $t1,$t1,0x49249249 #   0100 1001 0010 0100 1001 0010 0100 1001
+	addi $t2,$t2,0x381c0e07   #  0011 1000 0001 1100 0000 1110 0000 0111
+	addi $t3,$v0,0 
+
+	and $t4,$t3,$t1
+
+	sra $t5,$t3,1
+	and $t5,$t5,$t1
+
+
+	sra $t6,$t3,2
+	and $t6,$t6,$t1
+
+	add $t3,$t4,$t5
+	add $t3,$t3,$t6
+
+	sra $t5,$t3,3
+	add $t4,$t3,$t5
+
+	and $t4,$t4,$t2
+
+	sra $t6,$t3,6
+	and $t6,$t6,$t2
+
+	add $t3,$t4,$t6
+
+	sra $t4,$t3,9
+	sra $t5,$t3,18
+	sra $t6,$t3,27
+
+	add $t4,$t3,$t4
+	add $t4,$t4,$t5
+	add $t4,$t4,$t6
+
+	and $t4,$t4,0x3f
+	\end{verbatim}
+\end{tsk}
